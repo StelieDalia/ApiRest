@@ -23,7 +23,7 @@ con.connect((err)=>{
 
 
 app.get('/', (req, res)=>{
-    res.send('Stelie');
+    res.send('Hello Stelie');
 })
 
 
@@ -36,7 +36,7 @@ app.get('/api/get', (req, res)=>{
     })
 })
 
-
+// Lister les chaussures enregistrer dans la base de données;
 app.get('/api/get/:id', (req, res)=>{
     
     con.query('SELECT * FROM chaussures WHERE id_chaussure=?',[req.params.id_chaussure],(err,result)=>{
@@ -46,7 +46,7 @@ app.get('/api/get/:id', (req, res)=>{
     })
 })
 
-
+//Ajouter les chaussures dans la base de données;
 app.post('/api/post', (req, res)=>{
     const id_marque = req.body.id_marque;
     const taille = req.body.taille;
@@ -65,6 +65,7 @@ app.post('/api/post', (req, res)=>{
     })
 })
 
+//Ajouter des marques de chaussures dans la base de données
 app.post('/marque/post', (req, res)=>{
     const marque = req.body.marque;
     const logo= req.body.logo;
