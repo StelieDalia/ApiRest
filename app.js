@@ -38,7 +38,7 @@ app.get('/api/chaussures', (req, res)=>{
 
 
 //Ajouter les chaussures dans la base de données;
-app.post('/chaussures', (req, res)=>{
+app.post('/api/chaussures', (req, res)=>{
     const id_marque = req.body.id_marque;
     const taille = req.body.taille;
     const couleur = req.body.couleur;
@@ -57,7 +57,7 @@ app.post('/chaussures', (req, res)=>{
 })
 
 //Ajouter des marques de chaussures dans la base de données
-app.post('/marque', (req, res)=>{
+app.post('/api/marque', (req, res)=>{
     const marque = req.body.marque;
     const logo= req.body.logo;
     
