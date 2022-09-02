@@ -26,8 +26,8 @@ app.get('/', (req, res)=>{
     res.send('Hello Stelie');
 })
 
-
-app.get('/api/get', (req, res)=>{
+// Lister les chaussures enregistrer dans la base de données;
+app.get('/api/chaussures', (req, res)=>{
     
     con.query('SELECT * FROM chaussures',(err,result)=>{
         if(err) res.status(500).send(err)
@@ -36,18 +36,9 @@ app.get('/api/get', (req, res)=>{
     })
 })
 
-// Lister les chaussures enregistrer dans la base de données;
-app.get('/api/get/:id', (req, res)=>{
-    
-    con.query('SELECT * FROM chaussures WHERE id_chaussure=?',[req.params.id_chaussure],(err,result)=>{
-        if(err) res.status(500).send(err)
-        
-        res.status(200).json(result)
-    })
-})
 
 //Ajouter les chaussures dans la base de données;
-app.post('/api/post', (req, res)=>{
+app.post('/chaussures', (req, res)=>{
     const id_marque = req.body.id_marque;
     const taille = req.body.taille;
     const couleur = req.body.couleur;
@@ -66,7 +57,7 @@ app.post('/api/post', (req, res)=>{
 })
 
 //Ajouter des marques de chaussures dans la base de données
-app.post('/marque/post', (req, res)=>{
+app.post('/marque', (req, res)=>{
     const marque = req.body.marque;
     const logo= req.body.logo;
     
@@ -83,11 +74,11 @@ app.post('/marque/post', (req, res)=>{
 
 
 
-app.listen(3002, (err)=>{
+app.listen(3001, (err)=>{
     if(err)
     {
         console.log(err)
     }else{
-        console.log('on port 3002');
+        console.log('on port 3001');
     }
 })

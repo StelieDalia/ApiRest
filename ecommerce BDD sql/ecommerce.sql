@@ -59,13 +59,13 @@ CREATE TABLE `liste_commandes` (
 ) ENGINE=Innodb DEFAULT CHARSET=utf8;
 
 
-INSERT INTO `marque` (id_marque`, `marque`, `logo`) VALUES
+INSERT INTO `marque` (`id_marque`, `marque`, `logo`) VALUES
 (1, 'Adidas', 'LogoAdidas'),
 (2, 'Nike', 'LogoNike'),
 (3, 'Vans', 'LogoPuma');
 
 
-INSERT INTO `chaussures` (`id_Chaussures`, id_marque`, `taille`, `couleur`, `prix`, `nom_chaussure`) VALUES
+INSERT INTO `chaussures` (`id_Chaussures`, `id_marque`, `taille`, `couleur`, `prix`, `nom_chaussure`) VALUES
 (1, 3, 35, 'Rose', 15000, 'Nike'),
 (2, 1, 20, 'Bleu', 30000, 'Adidas'),
 (3, 2, 50, 'Noir', 45000, 'Vans');
