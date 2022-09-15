@@ -1,14 +1,16 @@
 var express = require("express")
 var mysql = require("mysql")
 var app = express()
+var cors = require("cors")
 
 app.use(express.json())
+app.use(cors())
 
 const con = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'ecommerce'
+    database: 'eshop'
 })
 
 
@@ -38,7 +40,7 @@ app.get('/api/chaussures', (req, res)=>{
 
 
 //Ajouter les chaussures dans la base de données;
-app.post('/api/chaussures', (req, res)=>{
+app.post('/api/chaussures/ajout', (req, res)=>{
     const id_marque = req.body.id_marque;
     const taille = req.body.taille;
     const couleur = req.body.couleur;
@@ -57,7 +59,7 @@ app.post('/api/chaussures', (req, res)=>{
 })
 
 //Ajouter des marques de chaussures dans la base de données
-app.post('/api/marque', (req, res)=>{
+app.post('/api/marques/ajout', (req, res)=>{
     const marque = req.body.marque;
     const logo= req.body.logo;
     
@@ -72,13 +74,52 @@ app.post('/api/marque', (req, res)=>{
     })
 })
 
+//recuperer l'id d'une chaussure sachant qu'un id a une valeur unique
+app.get('/api/chaussures/:id', (req, res)=>{
+    
+    con.query('SELECT * FROM chaussures WHERE id_chaussures=?',[req.params.id],(err,result)=>{
+        if(err) res.status(500).send(err)
+        
+        res.status(200).json(result)
+    })
+})
+
+//pour lister les pointures contenues dans la base de donnees
+app.get('/api/pointure/chaussures', (req, res)=>{
+    
+    con.query('SELECT * FROM pointure',(err,result)=>{
+        if(err) res.status(500).send(err)
+        
+        res.status(200).json(result)
+    })
+})
 
 
-app.listen(3001, (err)=>{
+app.get('/api/marques', (req, res)=>{
+    
+    con.query('SELECT * FROM marque',(err,result)=>{
+        if(err) res.status(500).send(err)
+        
+        res.status(200).json(result)
+    })
+})
+
+// pour faire une recherche
+app.get('/api/chaussures/search/:nom', (req, res)=>{
+//const name = req.params.nom;
+    con.query("SELECT * FROM `chaussures` WHERE `nom_chaussure` =?",[req.params.nom],(err,result)=>{
+        if(err) res.status(500).send(err)
+        
+        res.status(200).json(result)
+    })
+})
+
+
+app.listen(4000, (err)=>{
     if(err)
     {
         console.log(err)
     }else{
-        console.log('on port 3001');
+        console.log('on port 4000');
     }
 })
